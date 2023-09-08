@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS hits
     app        VARCHAR(100)                            NOT NULL,
     uri        VARCHAR(510)                            NOT NULL,
     ip         VARCHAR(100)                            NOT NULL,
-    time_stamp TIMESTAMP WITHOUT TIME ZONE             NOT NULL
+    time_stamp TIMESTAMP WITHOUT TIME ZONE             NOT NULL,
+    CONSTRAINT pk_hit PRIMARY KEY (id)
 );

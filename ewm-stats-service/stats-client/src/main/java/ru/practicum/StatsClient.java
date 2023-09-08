@@ -1,40 +1,59 @@
 package ru.practicum;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
-public class StatsClient extends BaseClient {
 
-    public StatsClient(@Value("${ewm-server.url}") String serverUrl, RestTemplateBuilder builder) {
-        super(
+@Component
+public class StatsClient {
+
+    private final RestTemplate rest;
+
+    @Autowired
+    public StatsClient(@Value("${stats-server.url}") String serverUrl, RestTemplateBuilder builder) {
+        rest =
                 builder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
                         .requestFactory(HttpComponentsClientHttpRequestFactory::new)
-                        .build()
-        );
+                        .build();
     }
 
-    public ResponseEntity<Object> createHit(EndpointHitDto dto) {
-        return post("/hit", dto);
+    public void createHit(EndpointHitDto dto) {
+        HttpEntity<EndpointHitDto> entity = new HttpEntity<>(dto, headers());
+        rest.exchange("/hit", HttpMethod.POST, entity, Object.class).getStatusCodeValue();
     }
 
-    public ResponseEntity<Object> findStats(LocalDateTime start, LocalDateTime end, Boolean unique) {
-        String encodedStartTime = URLEncoder.encode(start.toString(), StandardCharsets.UTF_8);
-        String endStartTime = URLEncoder.encode(end.toString(), StandardCharsets.UTF_8);
+    public List<ViewStatsDto> findStats(String start, String end, Boolean unique, List<String> uris) {
         Map<String, Object> parameters = Map.of(
-                "start", encodedStartTime,
-                "end", endStartTime,
-                "unique", unique
+                "start", start,
+                "end", end,
+                "unique", unique,
+                "uris", String.join(",", uris)
         );
 
-        return get("/stats?start={start}&end={end}&unique={unique}", parameters);
+        return rest.exchange("/stats?start={start}&end={end}&unique={unique}&uris={uris}",
+                HttpMethod.GET, new HttpEntity<>(headers()), new ParameterizedTypeReference<List<ViewStatsDto>>() {
+                },
+                parameters).getBody();
+    }
+
+    private HttpHeaders headers() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        return headers;
     }
 }
