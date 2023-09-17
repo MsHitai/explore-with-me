@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.EventFullDto;
@@ -31,6 +32,7 @@ public class AdminEventController {
     }
 
     @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
     public List<EventFullDto> findEventsForAdmin(@PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                  @Positive @RequestParam(defaultValue = "10") Integer size,
                                                  @RequestParam(required = false) List<Long> users,
@@ -50,6 +52,7 @@ public class AdminEventController {
     }
 
     @PatchMapping("/{eventId}")
+    @ResponseStatus(HttpStatus.OK)
     public EventFullDto patchEventStatus(@PathVariable Long eventId, @RequestBody UpdateEventAdminRequest updates) {
         log.info("Received PATCH request to change event status with updates {} of the event by id {} by admin",
                 updates.toString(), eventId);

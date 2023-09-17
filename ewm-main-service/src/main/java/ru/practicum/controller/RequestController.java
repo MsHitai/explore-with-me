@@ -30,12 +30,14 @@ public class RequestController {
     }
 
     @GetMapping("/{userId}/requests")
+    @ResponseStatus(HttpStatus.OK)
     public List<ParticipationRequestDto> findUserRequests(@PathVariable Long userId) {
         log.info("Received GET request to find all requests for the user by id {}", userId);
         return requestService.findUserRequests(userId);
     }
 
     @PatchMapping("/{userId}/requests/{requestId}/cancel")
+    @ResponseStatus(HttpStatus.OK)
     public ParticipationRequestDto cancelRequest(@PathVariable Long userId, @PathVariable Long requestId) {
         log.info("Received PATCH request to cancel request by the id {} from user by id {}", requestId, userId);
         return requestService.cancelRequest(userId, requestId);

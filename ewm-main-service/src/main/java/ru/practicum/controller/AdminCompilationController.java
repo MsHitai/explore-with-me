@@ -39,6 +39,7 @@ public class AdminCompilationController {
     }
 
     @PatchMapping("/{compId}")
+    @ResponseStatus(HttpStatus.OK)
     public CompilationDto patchCompilation(@PathVariable Long compId,
                                            @RequestBody(required = false) UpdateCompilationDto update) {
         log.info("Received PATCH request to patch compilation by id {} with update {}", compId, update.toString());

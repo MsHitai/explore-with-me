@@ -39,6 +39,7 @@ public class EventPrivateController {
     }
 
     @GetMapping("/{userId}/events")
+    @ResponseStatus(HttpStatus.OK)
     public List<EventShortDto> findAllEvents(@PathVariable Long userId,
                                              @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                              @Positive @RequestParam(defaultValue = "10") Integer size) {
@@ -47,12 +48,14 @@ public class EventPrivateController {
     }
 
     @GetMapping("/{userId}/events/{eventId}")
+    @ResponseStatus(HttpStatus.OK)
     public EventFullDto findById(@PathVariable Long userId, @PathVariable Long eventId) {
         log.info("Received GET request to find an event by id {} from user by id {}", eventId, userId);
         return eventService.findById(userId, eventId);
     }
 
     @PatchMapping("/{userId}/events/{eventId}")
+    @ResponseStatus(HttpStatus.OK)
     public EventFullDto patchEvent(@PathVariable Long userId, @PathVariable Long eventId,
                                    @RequestBody Map<String, Object> updates) {
         log.info("Received PATCH request to update event by id {} from user by id {} with the " +
@@ -61,6 +64,7 @@ public class EventPrivateController {
     }
 
     @GetMapping("/{userId}/events/{eventId}/requests")
+    @ResponseStatus(HttpStatus.OK)
     public List<ParticipationRequestDto> findParticipationRequests(@PathVariable Long userId,
                                                                    @PathVariable Long eventId) {
         log.info("Received GET request to find participant requests for the event by id {} by current user by id {}",
@@ -69,6 +73,7 @@ public class EventPrivateController {
     }
 
     @PatchMapping("/{userId}/events/{eventId}/requests")
+    @ResponseStatus(HttpStatus.OK)
     public EventRequestStatusUpdateResult changeRequestStatus(@PathVariable Long userId, @PathVariable Long eventId,
                                                               @RequestBody EventRequestStatusUpdateRequest update) {
         log.info("Received PATCH request to change request status from user by id {} to the event by id {} " +

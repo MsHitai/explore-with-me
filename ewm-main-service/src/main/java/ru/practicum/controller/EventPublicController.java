@@ -3,6 +3,7 @@ package ru.practicum.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.EventFullDto;
 import ru.practicum.dto.EventShortDto;
@@ -27,6 +28,7 @@ public class EventPublicController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<EventShortDto> findAllEvents(@RequestParam(required = false) String text,
                                              @RequestParam(required = false) List<Integer> categories,
                                              @RequestParam(required = false) Boolean paid,
@@ -47,6 +49,7 @@ public class EventPublicController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public EventFullDto findByIdPublic(@PathVariable Long id, HttpServletRequest request) {
         log.info("Received GET request to find an event by id {} on a public endpoint", id);
         return eventService.findByIdPublic(id, request);

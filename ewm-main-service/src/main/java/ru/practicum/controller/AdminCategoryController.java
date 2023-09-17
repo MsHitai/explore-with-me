@@ -38,6 +38,7 @@ public class AdminCategoryController {
     }
 
     @PatchMapping("/{catId}")
+    @ResponseStatus(HttpStatus.OK)
     public CategoryDto patchCategory(@PathVariable Integer catId,
                                      @RequestBody CategoryDto dto) {
         log.info("Received PATCH request to patch a category by id {} with the new name {}", catId, dto.getName());

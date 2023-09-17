@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.CompilationDto;
@@ -27,6 +28,7 @@ public class CompilationController {
     }
 
     @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
     public List<CompilationDto> findCompilations(@RequestParam(required = false) Boolean pinned,
                                                  @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                  @Positive @RequestParam(defaultValue = "10") Integer size) {
@@ -36,6 +38,7 @@ public class CompilationController {
     }
 
     @GetMapping("/{compId}")
+    @ResponseStatus(HttpStatus.OK)
     public CompilationDto findById(@PathVariable Long compId) {
         log.info("Received GET request to find compilation by id {}", compId);
         return compilationService.findById(compId);
