@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -22,6 +23,26 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String name;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "dislikes_users",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "dislike_id", referencedColumnName = "id")}
+    )
+    @ToString.Exclude
+    @Transient
+    private List<Dislike> dislikes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "likes_users",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "like_id", referencedColumnName = "id")}
+    )
+    @ToString.Exclude
+    @Transient
+    private List<Like> likes;
 
     @Override
     public final boolean equals(Object o) {

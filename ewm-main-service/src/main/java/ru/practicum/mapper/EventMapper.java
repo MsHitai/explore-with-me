@@ -70,4 +70,24 @@ public class EventMapper {
 
         return dto;
     }
+
+    public EventShortRatingDto mapToShortRatingDto(Event event, double rating) {
+        EventShortRatingDto dto = EventShortRatingDto.builder()
+                .id(event.getId())
+                .annotation(event.getAnnotation())
+                .confirmedRequests(event.getConfirmedRequests())
+                .eventDate(event.getEventDate())
+                .paid(event.getPaid())
+                .title(event.getTitle())
+                .views(event.getViews())
+                .rating(rating)
+                .build();
+        UserShortDto userShort = UserMapper.mapToShortDto(event.getInitiator());
+        CategoryDto categoryDto = CategoryMapper.mapToDto(event.getCategory());
+
+        dto.setInitiator(userShort);
+        dto.setCategory(categoryDto);
+
+        return dto;
+    }
 }
