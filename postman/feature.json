@@ -7,328 +7,6 @@
   },
   "item": [
     {
-      "name": "Добавление пользователя 1",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('name');\r",
-              "pm.expect(target).to.have.property('email');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"test@mail.ru\",\r\n    \"name\": \"initiator\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/admin/users",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "users"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Добавление первого лайкера",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('name');\r",
-              "pm.expect(target).to.have.property('email');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"liker@mail.ru\",\r\n    \"name\": \"first liker\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/admin/users",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "users"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Добавление второго лайкера Copy",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('name');\r",
-              "pm.expect(target).to.have.property('email');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"second-liker@mail.ru\",\r\n    \"name\": \"second liker\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/admin/users",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "users"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Добавление дизлайкера",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Пользователь должен содержать поля: id, name, email\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('name');\r",
-              "pm.expect(target).to.have.property('email');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"disliker@mail.ru\",\r\n    \"name\": \"disliker\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/admin/users",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "users"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Добавление категории 1",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Категория должна содержать поля: id, name\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('name');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"name\": \"концерт\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/admin/categories",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "categories"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Добавление события 1",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(201);  \r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, description, participantLimit, state, createdOn, location, requestModeration\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('title');\r",
-              "pm.expect(target).to.have.property('annotation');\r",
-              "pm.expect(target).to.have.property('category');\r",
-              "pm.expect(target).to.have.property('paid');\r",
-              "pm.expect(target).to.have.property('eventDate');\r",
-              "pm.expect(target).to.have.property('initiator');\r",
-              "pm.expect(target).to.have.property('description');\r",
-              "pm.expect(target).to.have.property('participantLimit');\r",
-              "pm.expect(target).to.have.property('state');\r",
-              "pm.expect(target).to.have.property('createdOn');\r",
-              "pm.expect(target).to.have.property('location');\r",
-              "pm.expect(target).to.have.property('requestModeration');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"annotation\": \"Let us all go to the concert of Mr. Super Star, he has been popular since forever\",\r\n    \"initiator\": {\r\n        \"id\": 1,\r\n        \"name\": \"initiator\"\r\n    },\r\n    \"category\": {\r\n        \"id\": 1\r\n    },\r\n    \"confirmedRequests\": 0,\r\n    \"description\": \"this concert will take place at the central square at midnight. Everybody is welcome to come!\",\r\n    \"eventDate\": \"2023-09-21 19:08:39\",\r\n    \"location\": {\r\n        \"lat\": -43.6937,\r\n        \"lon\": -125.1425\r\n    },\r\n    \"paid\": false,\r\n    \"participantLimit\": 0,\r\n    \"requestModeration\": false,\r\n    \"title\": \"Mr.Super Star Is Coming to The City!\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/users/1/events",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "users",
-            "1",
-            "events"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "Первый лайкер пытается поставить лайк неопубликованному событию",
       "event": [
         {
@@ -349,14 +27,14 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/2/likes?eventId=1",
+          "raw": "localhost:8080/ratings/7/likes?eventId=1",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "2",
+            "7",
             "likes"
           ],
           "query": [
@@ -364,70 +42,6 @@
               "key": "eventId",
               "value": "1"
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Публикация события по id 1",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-              "    pm.response.to.have.status(200);  \r",
-              "    pm.response.to.be.withBody;\r",
-              "    pm.response.to.be.json;\r",
-              "});\r",
-              "\r",
-              "const source = JSON.parse(pm.request.body.raw);\r",
-              "const target = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, description, participantLimit, state, createdOn, location, requestModeration\", function () {\r",
-              "pm.expect(target).to.have.property('id');\r",
-              "pm.expect(target).to.have.property('title');\r",
-              "pm.expect(target).to.have.property('annotation');\r",
-              "pm.expect(target).to.have.property('category');\r",
-              "pm.expect(target).to.have.property('paid');\r",
-              "pm.expect(target).to.have.property('eventDate');\r",
-              "pm.expect(target).to.have.property('initiator');\r",
-              "pm.expect(target).to.have.property('description');\r",
-              "pm.expect(target).to.have.property('participantLimit');\r",
-              "pm.expect(target).to.have.property('state');\r",
-              "pm.expect(target).to.have.property('createdOn');\r",
-              "pm.expect(target).to.have.property('location');\r",
-              "pm.expect(target).to.have.property('publishedOn');\r",
-              "pm.expect(target).to.have.property('requestModeration');\r",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"stateAction\": \"PUBLISH_EVENT\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8080/admin/events/1",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "admin",
-            "events",
-            "1"
           ]
         }
       },
@@ -454,20 +68,20 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/2/likes?eventId=1",
+          "raw": "localhost:8080/ratings/7/likes?eventId=2",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "2",
+            "7",
             "likes"
           ],
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
@@ -475,7 +89,7 @@
       "response": []
     },
     {
-      "name": "Второй лайкер ставит лайк Copy",
+      "name": "Второй лайкер ставит лайк",
       "event": [
         {
           "listen": "test",
@@ -495,20 +109,20 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/3/likes?eventId=1",
+          "raw": "localhost:8080/ratings/5/likes?eventId=2",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "3",
+            "5",
             "likes"
           ],
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
@@ -536,20 +150,20 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/3/likes?eventId=1",
+          "raw": "localhost:8080/ratings/5/likes?eventId=2",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "3",
+            "5",
             "likes"
           ],
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
@@ -577,20 +191,20 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/1/likes?eventId=1",
+          "raw": "localhost:8080/ratings/3/likes?eventId=2",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "1",
+            "3",
             "likes"
           ],
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
@@ -618,20 +232,20 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/4/dislikes?eventId=1",
+          "raw": "localhost:8080/ratings/8/dislikes?eventId=2",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "4",
+            "8",
             "dislikes"
           ],
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
@@ -659,20 +273,20 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "localhost:8080/ratings/4/dislikes?eventId=1",
+          "raw": "localhost:8080/ratings/8/dislikes?eventId=2",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
             "ratings",
-            "4",
+            "8",
             "dislikes"
           ],
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
