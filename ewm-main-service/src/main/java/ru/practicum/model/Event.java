@@ -73,6 +73,26 @@ public class Event {
     @ToString.Exclude
     private List<Compilation> compilations;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "dislikes_events",
+            joinColumns = {@JoinColumn(name = "event_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "dislike_id", referencedColumnName = "id")}
+    )
+    @ToString.Exclude
+    @Transient
+    private List<Dislike> dislikes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "likes_events",
+            joinColumns = {@JoinColumn(name = "event_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "like_id", referencedColumnName = "id")}
+    )
+    @ToString.Exclude
+    @Transient
+    private List<Like> likes;
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

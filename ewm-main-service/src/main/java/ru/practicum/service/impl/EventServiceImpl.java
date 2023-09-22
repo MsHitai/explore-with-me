@@ -146,11 +146,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventShortDto> findAllEventsForPublic(String text, List<Integer> categories, Boolean paid,
-                                                      LocalDateTime rangeStart, LocalDateTime rangeEnd,
-                                                      Boolean onlyAvailable, String sort, Integer from, Integer size,
+    public List<EventShortDto> findAllEventsForPublic(SearchEventParams params, Pageable page,
                                                       HttpServletRequest request) {
-        Pageable page = PageRequest.of(from / size, size);
+        LocalDateTime rangeStart = params.getRangeStart();
+        LocalDateTime rangeEnd = params.getRangeEnd();
+        String sort = params.getSort();
         if (rangeStart == null) {
             rangeStart = LocalDateTime.now();
         }
@@ -160,8 +160,8 @@ public class EventServiceImpl implements EventService {
         if (rangeStart.isAfter(rangeEnd)) {
             throw new ValidationException("The start of the event cannot be after the end of the event");
         }
-        List<Event> events = eventRepository.findEventsForPublic(text, categories, paid, rangeStart, rangeEnd,
-                onlyAvailable, page);
+        List<Event> events = eventRepository.findEventsForPublic(params.getText(), params.getCategories(),
+                params.getPaid(), rangeStart, rangeEnd, params.getOnlyAvailable(), page);
         if (sort != null && sort.equals("EVENT_DATE")) {
             events = events.stream()
                     .sorted(Comparator.comparing(Event::getEventDate))

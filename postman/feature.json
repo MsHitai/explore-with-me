@@ -1,0 +1,439 @@
+{
+  "info": {
+    "_postman_id": "86aabf30-cad9-49ca-b624-7b386a1bff89",
+    "name": "Rating EWM",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26967118"
+  },
+  "item": [
+    {
+      "name": "Первый лайкер пытается поставить лайк неопубликованному событию",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
+              "    pm.response.to.have.status(409);  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/7/likes?eventId=1",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "7",
+            "likes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Первый лайкер ставит лайк",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+              "    pm.response.to.be.ok;  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/7/likes?eventId=2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "7",
+            "likes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Второй лайкер ставит лайк",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+              "    pm.response.to.be.ok;  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/5/likes?eventId=2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "5",
+            "likes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Второй лайкер пытается поставить лайк еще раз",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
+              "    pm.response.to.have.status(409);  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/5/likes?eventId=2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "5",
+            "likes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Инициатор пытается поставить лайк своему событию",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
+              "    pm.response.to.have.status(409);  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/3/likes?eventId=2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "3",
+            "likes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Четвертый пользователь ставит дизлайк",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+              "    pm.response.to.have.status(200);  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/8/dislikes?eventId=2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "8",
+            "dislikes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Четвертый пользователь пытается поставить дизлайк еще раз",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
+              "    pm.response.to.have.status(409);  \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/8/dislikes?eventId=2",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "8",
+            "dislikes"
+          ],
+          "query": [
+            {
+              "key": "eventId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Поиск событий с сортировкой по рейтингу",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+              "    pm.response.to.be.ok;    \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "\r",
+              "const source = pm.collectionVariables.get('response');\r",
+              "const target = pm.response.json()[0];\r",
+              "\r",
+              "pm.test(\"Событие должно содержать поля: id, title, annotation, category, paid, eventDate, initiator, views, confirmedRequests, description, participantLimit, state, createdOn, publishedOn, location, rating, requestModeration\", function () {\r",
+              "pm.expect(target).to.have.property('id');\r",
+              "pm.expect(target).to.have.property('title');\r",
+              "pm.expect(target).to.have.property('annotation');\r",
+              "pm.expect(target).to.have.property('category');\r",
+              "pm.expect(target).to.have.property('paid');\r",
+              "pm.expect(target).to.have.property('eventDate');\r",
+              "pm.expect(target).to.have.property('initiator');\r",
+              "pm.expect(target).to.have.property('views');\r",
+              "pm.expect(target).to.have.property('confirmedRequests');\r",
+              "pm.expect(target).to.have.property('rating');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/events?from=0&size=10&rangeStart=2022-01-06%2013%3A30%3A38",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "events"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            },
+            {
+              "key": "paid",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "rangeStart",
+              "value": "2022-01-06%2013%3A30%3A38"
+            },
+            {
+              "key": "rangeEnd",
+              "value": "2097-09-06%2013%3A30%3A38",
+              "disabled": true
+            },
+            {
+              "key": "onlyAvailable",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "text",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "categories",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Поиск пользователей с рейтингом",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+              "    pm.response.to.be.ok;    \r",
+              "    pm.response.to.be.withBody;\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "\r",
+              "const source = pm.collectionVariables.get('response');\r",
+              "const target = pm.response.json()[0];\r",
+              "\r",
+              "pm.test(\"Пользователь должен содержать поля: id, name, rating\", function () {\r",
+              "pm.expect(target).to.have.property('userId');\r",
+              "pm.expect(target).to.have.property('name');\r",
+              "pm.expect(target).to.have.property('userStars');\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/ratings/users?from=0&size=10",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ratings",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

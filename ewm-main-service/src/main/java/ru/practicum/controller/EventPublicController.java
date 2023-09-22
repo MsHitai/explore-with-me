@@ -2,11 +2,14 @@ package ru.practicum.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.EventFullDto;
 import ru.practicum.dto.EventShortDto;
+import ru.practicum.dto.SearchEventParams;
 import ru.practicum.service.EventService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,8 +47,17 @@ public class EventPublicController {
         log.info("Received GET request to find events for public endpoint with params: text={}, categories={}, " +
                         "paid={}, rangeStart={}, rangeEnd={}, onlyAvailable={}, sort={}, from={}, size={}", text,
                 categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size);
-        return eventService.findAllEventsForPublic(text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort,
-                from, size, request);
+        SearchEventParams params = SearchEventParams.builder()
+                .text(text)
+                .categories(categories)
+                .paid(paid)
+                .rangeStart(rangeStart)
+                .rangeEnd(rangeEnd)
+                .onlyAvailable(onlyAvailable)
+                .sort(sort)
+                .build();
+        Pageable page = PageRequest.of(from / size, size);
+        return eventService.findAllEventsForPublic(params, page, request);
     }
 
     @GetMapping("/{id}")

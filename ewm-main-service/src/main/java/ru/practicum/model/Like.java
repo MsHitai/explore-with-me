@@ -10,39 +10,33 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "likes")
+public class Like {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
-    private String email;
-    @Column(nullable = false)
-    private String name;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "dislikes_users",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "dislike_id", referencedColumnName = "id")}
-    )
-    @ToString.Exclude
-    @Transient
-    private List<Dislike> dislikes;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "likes_users",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "like_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "like_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}
     )
     @ToString.Exclude
-    @Transient
-    private List<Like> likes;
+    private List<User> users;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "likes_events",
+            joinColumns = {@JoinColumn(name = "like_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "event_id", referencedColumnName = "id")}
+    )
+    @ToString.Exclude
+    private List<Event> events;
 
     @Override
     public final boolean equals(Object o) {
@@ -53,8 +47,8 @@ public class User {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ?
                 ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        User user = (User) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+        Like like = (Like) o;
+        return getId() != null && Objects.equals(getId(), like.getId());
     }
 
     @Override

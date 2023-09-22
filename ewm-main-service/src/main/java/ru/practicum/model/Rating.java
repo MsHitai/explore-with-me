@@ -1,48 +1,39 @@
 package ru.practicum.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@RequiredArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "ratings")
+public class Rating {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
-    private String email;
-    @Column(nullable = false)
-    private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "dislikes_users",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "dislike_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
     @ToString.Exclude
-    @Transient
-    private List<Dislike> dislikes;
+    private Event event;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "likes_users",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "like_id", referencedColumnName = "id")}
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     @ToString.Exclude
-    @Transient
-    private List<Like> likes;
+    private User user;
+
+    private double userStars;
+
+    private double eventStars;
 
     @Override
     public final boolean equals(Object o) {
@@ -53,8 +44,8 @@ public class User {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ?
                 ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        User user = (User) o;
-        return getId() != null && Objects.equals(getId(), user.getId());
+        Rating rating = (Rating) o;
+        return getId() != null && Objects.equals(getId(), rating.getId());
     }
 
     @Override
